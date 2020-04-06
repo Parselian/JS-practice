@@ -1,0 +1,112 @@
+.clock
+  width: 400px
+  height: 400px
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: $bg-clock-color
+  border-radius: 200px
+  box-shadow: 10px 7px 28px 0px $drop-shadow-color, -10px -7px 28px 0px $inner-drop-shadow-color, inset 10px 7px 16px 0px $bg-clock-inner-shadow
+  &__face
+    width: 320px
+    height: 320px
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    background-color: $bg-clock-color
+    border-radius: 160px
+    box-shadow: 9px 7px 16px 0px $drop-shadow-color, inset -21px 11px 32px 0px $clock-face-inner-shadow
+  &__segments
+    width: calc(100% - 30px)
+    position: relative
+    &-line
+      width: 100%
+      position: absolute
+      display: flex
+      justify-content: space-between
+      top: 50%
+      left: 50%
+      transform-origin: center center
+      transform: translateX(-50%)
+      &_0deg, &_90deg
+        .clock
+          &__segments
+            &-segment
+              width: 30px
+              background-color: $accent-segment-color
+      &_45deg, &_135deg
+        .clock
+          &__segments
+            &-segment
+              width: 20px
+              background-color: $accent-segment-color
+      &_15deg
+        transform: translateX(-50%) rotate(-15deg)
+      &_30deg
+        transform: translateX(-50%) rotate(-30deg)
+      &_45deg
+        transform: translateX(-50%) rotate(-45deg)
+      &_60deg
+        transform: translateX(-50%) rotate(-60deg)
+      &_75deg
+        transform: translateX(-50%) rotate(-75deg)
+      &_90deg
+        transform: translateX(-50%) rotate(-90deg)
+      &_105deg
+        transform: translateX(-50%) rotate(-105deg)
+      &_120deg
+        transform: translateX(-50%) rotate(-120deg)
+      &_135deg
+        transform: translateX(-50%) rotate(-135deg)
+      &_150deg
+        transform: translateX(-50%) rotate(-150deg)
+      &_165deg
+        transform: translateX(-50%) rotate(-165deg)
+    &-segment
+      width: 10px
+      height: 4px
+      background-color: $main-segment-color
+      border-radius: 3px
+  &__arrows
+    height: calc(100% - 32px)
+    width: calc(100% - 32px)
+    position: absolute
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: flex-end
+    top: 50%
+    transform: translateY(-49%)
+    &-arrow
+      position: relative
+      display: inline-block
+      transform-origin: 0 center
+      transform: rotate(-90deg)
+      &:before
+        content: ''
+        position: absolute
+        left: 0
+        top: 50%
+      &_second
+        width: 50%
+        height: 2px
+        background-color: $second-hand-color
+        z-index: 3
+        &:before
+          width: 4px
+          height: 4px
+          border-radius: 2px
+          background-color: $second-hand-color
+          transform: translateY(-2px)
+      &_minute
+        width: 35%
+        height: 4px
+        background-color: $minute-hand-color
+        z-index: 2
+        &:before
+          width: 8px
+          height: 8px
+          border-radius: 4px
+          background: linear-gradient(to right, $hour-hand-color 0%, $minute-hand-color 100%)
+          transform: translateY(-4px)
