@@ -72,7 +72,7 @@
     height: calc(100% - 32px)
     width: calc(100% - 32px)
     position: absolute
-    display: flex
+    // display: flex
     flex-direction: column
     justify-content: center
     align-items: flex-end
@@ -82,11 +82,14 @@
       position: relative
       display: inline-block
       transform-origin: 0 center
-      transform: rotate(-90deg)
+      top: 50%
+      left: 50%
+      transform: translate(0, -14px) rotate(-90deg)
+      will-change: transform
       &:before
         content: ''
         position: absolute
-        left: 0
+        left: -2px
         top: 50%
       &_second
         width: 50%
@@ -99,14 +102,25 @@
           border-radius: 2px
           background-color: $second-hand-color
           transform: translateY(-2px)
-      &_minute
+      &_minute, &_hour
         width: 35%
         height: 4px
         background-color: $minute-hand-color
         z-index: 2
+        left: 0
+        transform-origin: 2px center
+        transform: translate(-6.4px,-13px) rotate(-60deg)
         &:before
           width: 8px
           height: 8px
           border-radius: 4px
           background: linear-gradient(to right, $hour-hand-color 0%, $minute-hand-color 100%)
           transform: translateY(-4px)
+      &_hour
+        width: 20%
+        transform: translate(-2px,-31.4px) rotate(30deg)
+        left: 50%
+        background-color: $hour-hand-color
+        z-index: 1
+        &::before
+          background-color: $hour-hand-color
