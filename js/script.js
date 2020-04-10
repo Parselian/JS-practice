@@ -1,6 +1,17 @@
 'use-strict'
 
 window.addEventListener('DOMContentLoaded', () => {
+  const preloader = document.querySelector('.preloader'),
+        clockAnalog = document.querySelector('.clock'),
+        clockDigital = document.querySelector('.clock-digital');
+
+  function hidePreloader() {
+    let timerId = setTimeout(() => {
+      preloader.classList.remove('preloader_visible');
+    }, 2000)
+  }
+  hidePreloader();
+
   function getTime() {
     const date = new Date();
 
@@ -13,17 +24,15 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function animateClockArrows(calcTime) {
-    const clockArrows = document.querySelector('.clock__arrows'),
+    const clockArrows = clockAnalog.querySelector('.clock__arrows'),
       secondHand = clockArrows.querySelector('.clock__arrows-arrow_second'), minuteHand = clockArrows.querySelector('.clock__arrows-arrow_minute'), hourHand = clockArrows.querySelector('.clock__arrows-arrow_hour');
 
     let intervalId,
-        currentTime,
         secondHandAngle,
         minuteHandAngle,
         hourHandAngle; 
 
-    intervalId = setInterval(() => {
-      currentTime = calcTime(),
+    function rotateArrows(currentTime) {
       secondHandAngle = (currentTime.seconds / 60) * 360,
       minuteHandAngle = (currentTime.minutes) * 6,
       hourHandAngle = currentTime.hours > 12 ? (currentTime.hours - 12) * 30 : currentTime.hours * 30;
@@ -34,9 +43,35 @@ window.addEventListener('DOMContentLoaded', () => {
         rotate(${Math.ceil(minuteHandAngle) - 90}deg)`;
       hourHand.style.transform = `translate(-2px,-31.4px) 
         rotate(${Math.ceil(hourHandAngle) - 90}deg)`;
+    }
 
-      console.log(`${currentTime.hours}:${currentTime.minutes}:${currentTime.seconds}`);
+    function updDigitalClock(currentTime) {
+      let seconds = currentTime.seconds < 10 ? 
+        '0' + currentTime.seconds : currentTime.seconds, 
+          minutes = currentTime.minutes < 10 ? 
+            '0' + currentTime.minutes : currentTime.minutes,
+          hours = currentTime.hours < 10 ? 
+            '0' + currentTime.hours : currentTime.hours;
+
+      clockDigital.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    intervalId = setInterval(() => {
+      rotateArrows(calcTime());
+
+      updDigitalClock(calcTime());
     }, 1000);
   }
   animateClockArrows(getTime);
+
+  function toggleClocks() {
+    clockAnalog.addEventListener('mouseenter', () => {
+      clockDigital.classList.add('clock-digital_fadein');
+    });
+
+    clockAnalog.addEventListener('mouseleave', () => {
+      clockDigital.classList.remove('clock-digital_fadein');
+    })
+  }
+  toggleClocks();
 });

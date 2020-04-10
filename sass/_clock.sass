@@ -7,6 +7,25 @@
   background-color: $bg-clock-color
   border-radius: 200px
   box-shadow: 10px 7px 28px 0px $drop-shadow-color, -10px -7px 28px 0px $inner-drop-shadow-color, inset 10px 7px 16px 0px $bg-clock-inner-shadow
+  transition: .5s
+  &:hover
+    // opacity: 0 
+    transform: translateY(-35%)
+  &-digital
+    position: absolute
+    width: 100vw
+    top: 50%
+    left: 50%
+    text-align: center
+    font-size: 15vw
+    color: $digital-clock-color
+    transform: translate(-50%, -50%)
+    z-index: -3
+    opacity: 0
+    transition: .5s
+    &_fadein
+      opacity: 1
+      transform: translate(-50%, 20%)
   &__face
     width: 320px
     height: 320px
@@ -35,34 +54,70 @@
             &-segment
               width: 30px
               background-color: $accent-segment-color
-      &_45deg, &_135deg
+      &_30deg, &_60deg, &_120deg, &_150deg
         .clock
           &__segments
             &-segment
-              width: 20px
+              width: 15px
               background-color: $accent-segment-color
-      &_15deg
-        transform: translateX(-50%) rotate(-15deg)
+      &_6deg
+        transform: translateX(-50%) rotate(-6deg)
+      &_12deg
+        transform: translateX(-50%) rotate(-12deg)
+      &_18deg
+        transform: translateX(-50%) rotate(-18deg)
+      &_24deg
+        transform: translateX(-50%) rotate(-24deg)
       &_30deg
         transform: translateX(-50%) rotate(-30deg)
-      &_45deg
-        transform: translateX(-50%) rotate(-45deg)
+      &_36deg
+        transform: translateX(-50%) rotate(-36deg)
+      &_42deg
+        transform: translateX(-50%) rotate(-42deg)
+      &_48deg
+        transform: translateX(-50%) rotate(-48deg)
+      &_54deg
+        transform: translateX(-50%) rotate(-54deg)
       &_60deg
         transform: translateX(-50%) rotate(-60deg)
-      &_75deg
-        transform: translateX(-50%) rotate(-75deg)
+      &_66deg
+        transform: translateX(-50%) rotate(-66deg)
+      &_72deg
+        transform: translateX(-50%) rotate(-72deg)
+      &_78deg
+        transform: translateX(-50%) rotate(-78deg)
+      &_84deg
+        transform: translateX(-50%) rotate(-84deg)
       &_90deg
         transform: translateX(-50%) rotate(-90deg)
-      &_105deg
-        transform: translateX(-50%) rotate(-105deg)
+      &_96deg
+        transform: translateX(-50%) rotate(-96deg)
+      &_102deg
+        transform: translateX(-50%) rotate(-102deg)
+      &_108deg
+        transform: translateX(-50%) rotate(-108deg)
+      &_114deg
+        transform: translateX(-50%) rotate(-114deg)
       &_120deg
         transform: translateX(-50%) rotate(-120deg)
-      &_135deg
-        transform: translateX(-50%) rotate(-135deg)
+      &_126deg
+        transform: translateX(-50%) rotate(-126deg)
+      &_132deg
+        transform: translateX(-50%) rotate(-132deg)
+      &_138deg
+        transform: translateX(-50%) rotate(-138deg)
+      &_144deg
+        transform: translateX(-50%) rotate(-144deg)
       &_150deg
         transform: translateX(-50%) rotate(-150deg)
-      &_165deg
-        transform: translateX(-50%) rotate(-165deg)
+      &_156deg
+        transform: translateX(-50%) rotate(-156deg)
+      &_162deg
+        transform: translateX(-50%) rotate(-162deg)
+      &_168deg
+        transform: translateX(-50%) rotate(-168deg)
+      &_174deg
+        transform: translateX(-50%) rotate(-174deg)
     &-segment
       width: 10px
       height: 4px
