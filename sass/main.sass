@@ -28,19 +28,22 @@ input[type=number]
   border-radius: 3px
   &:focus
     border-color: $accent-color
+  &_hidden
+    opacity: 0 !important
+    z-index: -100
   &__arrow
     position: absolute
     content: ''
-    display: none
     width: 32px
     height: 100%
     font-size: 24px
     font-weight: 700
     color: $accent-color
     background-color: transparent
+    opacity: 1
     cursor: pointer
-    transition: .2s 
-    will-change: background-color, color
+    transition: .1s 
+    will-change: background-color, color, opacity
     &:hover
       color: $alt-text-color
       background-color: $accent-color
@@ -49,6 +52,9 @@ input[type=number]
   &__plus
     right: 0
     border-radius: 0px 3px 3px 0px
+
+.hidden
+  display: none !important
 
 .button
   padding-top: 11px 

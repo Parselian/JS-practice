@@ -1,77 +1,70 @@
-'use-strict'
+'use-strict';
 
 window.addEventListener('DOMContentLoaded', () => {
   const preloader = document.querySelector('.preloader'),
-        clockAnalog = document.querySelector('.clock'),
-        clockDigital = document.querySelector('.clock-digital');
-
+        guestCalc = document.querySelector('.guest-calc'),
+        calcTitle = guestCalc.querySelector('.guest-calc__title'),
+        calcDropdown = guestCalc.querySelector('.guest-calc__dropdown'),
+        calcButtons = guestCalc.querySelector('.guest-calc__buttons');
+        
   function hidePreloader() {
     let timerId = setTimeout(() => {
       preloader.classList.remove('preloader_visible');
-    }, 2000)
+    }, 1000);
   }
   hidePreloader();
 
-  function getTime() {
-    const date = new Date();
-
-    let hours = date.getHours(),
-        minutes = date.getMinutes(),
-        seconds = date.getSeconds(),
-        milliseconds = date.getMilliseconds();
-
-    return {hours, minutes, seconds, milliseconds}
-  }
-
-  function animateClockArrows(calcTime) {
-    const clockArrows = clockAnalog.querySelector('.clock__arrows'),
-      secondHand = clockArrows.querySelector('.clock__arrows-arrow_second'), minuteHand = clockArrows.querySelector('.clock__arrows-arrow_minute'), hourHand = clockArrows.querySelector('.clock__arrows-arrow_hour');
-
-    let intervalId,
-        secondHandAngle,
-        minuteHandAngle,
-        hourHandAngle; 
-
-    function rotateArrows(currentTime) {
-      secondHandAngle = (currentTime.seconds / 60) * 360,
-      minuteHandAngle = (currentTime.minutes) * 6,
-      hourHandAngle = currentTime.hours > 12 ? (currentTime.hours - 12) * 30 : currentTime.hours * 30;
-
-      secondHand.style.transform = `translate(0, -14px) 
-        rotate(${Math.ceil(secondHandAngle) - 90}deg)`;
-      minuteHand.style.transform = `translate(-6.4px,-13px) 
-        rotate(${Math.ceil(minuteHandAngle) - 90}deg)`;
-      hourHand.style.transform = `translate(-2px,-31.4px) 
-        rotate(${Math.ceil(hourHandAngle) - 90}deg)`;
+  const controlInputButtons = () => {
+    calcDropdown.remove();
+    
+    function hideAllInputButtons() {
+      const calcItems = guestCalc.querySelectorAll('.item-input__arrow')
+      calcItems.forEach(item => {
+        item.classList.add('item-input_hidden');
+      });
     }
 
-    function updDigitalClock(currentTime) {
-      let seconds = currentTime.seconds < 10 ? 
-        '0' + currentTime.seconds : currentTime.seconds, 
-          minutes = currentTime.minutes < 10 ? 
-            '0' + currentTime.minutes : currentTime.minutes,
-          hours = currentTime.hours < 10 ? 
-            '0' + currentTime.hours : currentTime.hours;
-
-      clockDigital.textContent = `${hours}:${minutes}:${seconds}`;
+    function showInputButtons(target) {
+      target.nextElementSibling.classList.remove('item-input_hidden');
+      target.previousElementSibling.classList.remove('item-input_hidden');
     }
 
-    intervalId = setInterval(() => {
-      rotateArrows(calcTime());
+    function changeInputValue(target) {
+      if (target.matches('.item-input__plus')) {
+        target.previousElementSibling.value++;
+        showDropdown(target);
+      } else if (target.matches('.item-input__minus') && 
+      target.nextElementSibling.value > 0) {
+          target.nextElementSibling.value--;
+      }
+    }
 
-      updDigitalClock(calcTime());
-    }, 1000);
-  }
-  animateClockArrows(getTime);
+    function showDropdown(target) {
+      let parentElem = target.parentElement.parentElement,
+          clonedDropdown = calcDropdown.cloneNode(true);
 
-  function toggleClocks() {
-    clockAnalog.addEventListener('mouseenter', () => {
-      clockDigital.classList.add('clock-digital_fadein');
+      if (!parentElem.nextElementSibling) {
+        parentElem.insertAdjacentElement('afterend', clonedDropdown);
+      }
+
+      
+    }
+
+    //controlling inputs
+    guestCalc.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = e.target;
+
+      if (!target.matches('.item-input__arrow')) {
+        hideAllInputButtons();
+      }
+
+      if (target.matches('.item-input')) {
+        showInputButtons(target);
+      } else if (target.matches('.item-input__arrow')) {
+        changeInputValue(target);
+      }
     });
-
-    clockAnalog.addEventListener('mouseleave', () => {
-      clockDigital.classList.remove('clock-digital_fadein');
-    })
-  }
-  toggleClocks();
+  };
+  controlInputButtons();
 });

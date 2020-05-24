@@ -62,17 +62,17 @@
         
         <div class="guest-calc__item-input">
           <button class="item-input__arrow 
-          item-input__minus">&minus;</button>
-          <input type="number" step="1" class="item-input">
-          <button class="item-input__arrow 
+          item-input__minus item-input_hidden">&minus;</button>
+          <input type="number" step="1" value="0" class="item-input">
+          <button class="item-input__arrow item-input_hidden 
           item-input__plus">&#43;</button>
         </div>
 
         <div class="guest-calc__item-input">
-          <button class="item-input__arrow 
+          <button class="item-input__arrow item-input_hidden 
           item-input__minus">&minus;</button>
-          <input type="number" step="1" class="item-input">
-          <button class="item-input__arrow 
+          <input type="number" step="1" value="0" class="item-input input_children">
+          <button class="item-input__arrow item-input_hidden 
           item-input__plus">&#43;</button>
         </div>
       </div>
@@ -85,10 +85,10 @@
           </label> 
 
           <div class="guest-calc__item-input">
-            <button class="item-input__arrow 
+            <button class="item-input__arrow item-input_hidden 
           item-input__minus">&minus;</button>
-            <input type="number" step="1" class="item-input guest-calc__dropdown-input">
-            <button class="item-input__arrow 
+            <input type="number" step="1" value="0" class="item-input guest-calc__dropdown-input">
+            <button class="item-input__arrow item-input_hidden 
           item-input__plus">&#43;</button>
           </div>
         </div>
@@ -100,10 +100,10 @@
           </label>
 
           <div class="guest-calc__item-input">
-            <button class="item-input__arrow 
+            <button class="item-input__arrow item-input_hidden 
           item-input__minus">&minus;</button>
-            <input type="number" step="1" class="item-input guest-calc__dropdown-input">
-            <button class="item-input__arrow 
+            <input type="number" step="1" value="0" class="item-input guest-calc__dropdown-input">
+            <button class="item-input__arrow item-input_hidden 
           item-input__plus">&#43;</button>
           </div>
         </div>
@@ -114,8 +114,8 @@
     <!-- /.guest-calc__wrap -->
 
     <div class="guest-calc__buttons">
-      <button class="button guest-calc__buttons-add">&#43; Add room</button> 
-      <button type="submit" class="button guest-calc__buttons-submit">Done</button> 
+      <button id="button-add" class="button guest-calc__buttons-add">&#43; Add room</button> 
+      <button id="button-send" type="submit" class="button guest-calc__buttons-submit">Done</button> 
     </div>
     <!-- /.guest-calc__buttons -->
   </form>
