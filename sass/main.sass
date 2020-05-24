@@ -1,13 +1,63 @@
 @import 'variables.sass'
 
 body
-  width: 100vw
-  height: 100vh
+  font-family: 'Lato', sans-serif
+  background-color: $bg-color
   display: flex
-  justify-content: center
   align-items: center
-  background-image: linear-gradient(135deg, rgba(242,246,255,1) 0%, rgba(202,206,215,1) 100%)
-  overflow: hidden
+  justify-content: center
+  height: 100vh
 
-@import 'clock.sass'
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  margin: 0
+
+input[type=number]
+  -moz-appearance: textfield
+
+.item-input
+  max-width: 155px
+  height: 40px
+  padding: 0
+  font-size: 14px
+  text-align: center
+  border: 1px solid $border-input-color
+  border-radius: 3px
+  &:focus
+    border-color: $accent-color
+  &__arrow
+    position: absolute
+    content: ''
+    display: none
+    width: 32px
+    height: 100%
+    font-size: 24px
+    font-weight: 700
+    color: $accent-color
+    background-color: transparent
+    cursor: pointer
+    transition: .2s 
+    will-change: background-color, color
+    &:hover
+      color: $alt-text-color
+      background-color: $accent-color
+  &__minus
+      border-radius: 3px 0px 0px 3px
+  &__plus
+    right: 0
+    border-radius: 0px 3px 3px 0px
+
+.button
+  padding-top: 11px 
+  padding-bottom: 11px
+  font-weight: 700
+  text-transform: uppercase
+  background-color: transparent
+  cursor: pointer
+
+@import 'guest-form.sass'
 @import 'preloader.sass'
+@import 'media.sass'

@@ -1,0 +1,90 @@
+.guest-calc
+  width: 390px
+  background-color: #ffffff
+  &__header
+    position: relative
+    padding: 17px 0px 17px 20px
+    font-weight: 700
+    color: $alt-text-color
+    background-color: $accent-color
+    border-radius: 3px 3px 0px 0px
+    &::before
+      position: absolute
+      top: 0
+      left: 50%      
+      content: ''
+      width: 14px
+      height: 14px
+      background-color: inherit
+      border-radius: 2px
+      transform: rotate(45deg) translateX(-7px)
+  &__guesttype
+    &s
+      display: flex
+      padding: 12px 0 12px 60px
+      background-color: $form-bg-color
+      border-bottom: 1px solid $border-color
+    width: 50%
+    font-size: 14px
+  &__item
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding-right: 10px
+    border-bottom: 1px solid $border-color
+    &-remove
+      width: 10px
+      height: 12px
+      margin-right: 3px
+      padding: 25px 18px
+      border-right: 1px solid $border-color
+      fill: $trash-color
+      cursor: pointer
+      transition: fill .2s
+      will-change: transition
+      &:hover
+        fill: $accent-color
+    &-input
+      position: relative
+      margin: 10px 0
+  &__dropdown
+    display: flex
+    flex-direction: column
+    padding: 10px 10px 10px 60px
+    background-color: $form-bg-color
+    border-left: 3px solid $accent-color
+    &-item
+      display: flex
+      justify-content: space-between
+      align-items: center
+      width: 100%
+      margin-bottom: 10px
+      &:last-child
+        margin-bottom: 0
+    &-label
+      display: block
+      max-width: 155px
+  &__buttons
+    padding: 10px
+    display: flex
+    justify-content: space-around
+    .button
+      max-width: 180px
+      width: 50%
+    &-add
+      color: $accent-color
+      border: 2px solid transparent
+      border-radius: 3px
+      transition: .2s border
+      will-change: border-color
+      &:hover
+        border-color: $accent-color
+    &-submit
+      color: $alt-text-color
+      background-color: $accent-color
+      border-radius: 3px
+      transition: .2s 
+      will-change: color background-color
+      &:hover
+        color: $accent-color
+        background-color: $alt-text-color
