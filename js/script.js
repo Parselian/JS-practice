@@ -14,10 +14,11 @@ window.addEventListener('DOMContentLoaded', () => {
       preloader.classList.remove('preloader_visible');
     }, 10);
   }
-  hidePreloader();
+	hidePreloader();
 
   const controlInputButtons = () => {
-    calcDropdown.remove();
+		calcDropdown.remove();
+		calcItem.remove();
 
     function removeItemInput(target) {
 			let parentBlock = target.closest('.guest-calc__item'),
@@ -34,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function addItemInput() {
 			let clonedItem = calcItem.cloneNode('true');
 
-      guestCalcWrap.insertAdjacentElement('beforeend', clonedItem);
+			guestCalcWrap.insertAdjacentElement('beforeend', clonedItem);
     }
     
     function hideAllInputButtons() {
@@ -68,15 +69,37 @@ window.addEventListener('DOMContentLoaded', () => {
           inputChildren = target.parentElement.querySelector('.item-input'),
           clonedDropdown = calcDropdown.cloneNode(true);
 
-      if (parentNeighbor !== clonedDropdown && inputChildren.value > 0 && inputChildren.matches('.input_children')) {
-
+			if (parentNeighbor && !parentNeighbor.matches('.guest-calc__dropdown') && inputChildren.value > 0 && inputChildren.matches('.input_children') || 
+			!parentNeighbor && inputChildren.value > 0 && inputChildren.matches('.input_children')) {
         parentElem.insertAdjacentElement('afterend', clonedDropdown);
-			} else if (parentNeighbor && inputChildren.value <= 0 && 
+			}  else if (parentNeighbor && inputChildren.value <= 0 && 
 			parentNeighbor.matches('.guest-calc__dropdown') && inputChildren.matches('.input_children')) {
 
         parentNeighbor.remove();
       }
-    }
+		}
+		
+		function countRoomsAndGuests() {
+			let allRooms = guestCalc.querySelectorAll('.guest-calc__item'),
+					roomsCounter = 0,
+					guestCounter = 0;
+
+			allRooms.forEach (item => {
+				let itemInputs = item.querySelectorAll('input');
+
+				itemInputs.forEach (item2 => {
+					guestCounter += +item2.value;
+				});
+			});
+
+			roomsCounter = allRooms.length;
+
+			if (allRooms.length === 0) {
+				calcTitle.textContent = 'Add a room';
+			} else {
+				calcTitle.textContent = `${roomsCounter} rooms - ${guestCounter} guests`;
+			}
+		}
 
     //controlling inputs
     guestCalc.addEventListener('click', (e) => {
@@ -91,12 +114,14 @@ window.addEventListener('DOMContentLoaded', () => {
         showInputButtons(target);
       } else if (target.matches('.item-input__arrow')) {
         changeInputValue(target, 3);
-        toggleDropdown(target);
+				toggleDropdown(target);
       } else if (target.closest('.guest-calc__item-remove')) {
-        removeItemInput(target);
+				removeItemInput(target);
       } else if (target.matches('#button-add')) {
-        addItemInput();
-      }
+				addItemInput();
+			}
+			
+			countRoomsAndGuests();
     });
   };
   controlInputButtons();
